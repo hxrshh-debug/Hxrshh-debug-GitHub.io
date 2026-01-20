@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hey Devika 💖</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  text-align: center;
+  overflow-x: hidden;
+}
+
+/* Common button */
+.btn {
+  padding: 18px 35px;
+  font-size: 22px;
+  border: none;
+  border-radius: 40px;
+  background: #ff4d6d;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  transition: 0.3s;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+  background: #ff1f4a;
+}
+
+.page {
+  display: none;
+  min-height: 100vh;
+  padding-top: 120px;
+}
+
+.active {
+  display: block;
+}
+
+h1, h2 {
+  color: #fff;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+}
+
+/* Countdown */
+#countdown {
+  font-size: 90px;
+  color: white;
+  margin-top: 40px;
+}
+
+/* Images */
+.images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.images img {
+  width: 280px;
+  border-radius: 25px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+}
+
+/* Celebration */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: red;
+  animation: fall 4s linear infinite;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-100vh) rotate(0); }
+  100% { transform: translateY(100vh) rotate(360deg); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div id="page1" class="page active">
+  <h1>Hey Devika 🥰</h1>
+  <br><br>
+  <button class="btn" onclick="goPage(2)">Open 💖</button>
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2" class="page">
+  <h2>Ready for a Suprise? 😍</h2>
+  <br><br>
+  <button class="btn" onclick="startCountdown()">Click here for Suprise 🎁</button>
+</div>
+
+<!-- PAGE 3 -->
+<div id="page3" class="page">
+  <h2>Just waittt... 💕</h2>
+  <div id="countdown">10</div>
+</div>
+
+<!-- PAGE 4 -->
+<div id="page4" class="page">
+  <h1>Surpriseee 🎉💖</h1>
+
+  <div class="images">
+    <img src="doraemon.jpg" alt="Doraemon">
+    <img src="dosa.jpg" alt="Dosa">
+  </div>
+</div>
+
+<script>
+function goPage(n) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page' + n).classList.add('active');
+}
+
+function startCountdown() {
+  goPage(3);
+  let count = 10;
+  let cd = document.getElementById('countdown');
+
+  let timer = setInterval(() => {
+    count--;
+    cd.innerText = count;
+
+    if (count === 0) {
+      clearInterval(timer);
+      goPage(4);
+      startCelebration();
+    }
+  }, 1000);
+}
+
+/* Celebration confetti */
+function startCelebration() {
+  for (let i = 0; i < 60; i++) {
+    let c = document.createElement('div');
+    c.className = 'confetti';
+    c.style.left = Math.random() * 100 + 'vw';
+    c.style.background = `hsl(${Math.random()*360},100%,50%)`;
+    c.style.animationDuration = (Math.random()*3 + 2) + 's';
+    document.body.appendChild(c);
+  }
+}
+</script>
+
+</body>
+</html>
